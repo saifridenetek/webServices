@@ -1,0 +1,58 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type DecisionHistory {
+  id: Float!
+  status: String!
+  date: DateTime!
+  comment: String!
+  application: Application!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Position {
+  id: Float!
+  title: String!
+  type: String!
+  description: String!
+  applications: [Application!]
+}
+
+type Application {
+  id: Float!
+  status: String!
+  createdAt: DateTime!
+  candidate: Candidate!
+  position: Position!
+  decisionHistory: [DecisionHistory!]
+}
+
+type Candidate {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String
+  cvUrl: String
+}
+
+type Query {
+  candidates: [Candidate!]!
+}
+
+type Mutation {
+  createCandidate(input: CreateCandidateInput!): Candidate!
+}
+
+input CreateCandidateInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String
+  cvUrl: String
+}
