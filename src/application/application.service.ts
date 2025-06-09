@@ -36,6 +36,13 @@ export class ApplicationService {
     return this.applicationRepo.save(application);
   }
 
+  async findByStatus(status: string): Promise<Application[]> {
+  return this.applicationRepo.find({
+    where: { status },
+    relations: ['candidate', 'position'],
+  });
+}
+
   findAll(): Promise<Application[]> {
     return this.applicationRepo.find();
   }
@@ -48,13 +55,22 @@ export class ApplicationService {
     return app;
   }
 
-  async update(id: number, input: UpdateApplicationInput): Promise<Application> {
-    const application = await this.applicationRepo.preload({ ...input, id });
-    if (!application) {
-      throw new NotFoundException(`Application with ID ${id} not found`);
-    }
-    return this.applicationRepo.save(application);
+async update(id: number, input: UpdateApplicationInput): Promise<Application> {
+  const application = await this.applicationRepo.findOne({
+    where: { id },
+    relations: ['candidate', 'position'],
+  });
+  if (!application) {
+    throw new NotFoundException(`Application with ID ${id} not found`);
   }
+
+  // Met à jour le statut
+  if (input.status) {
+    application.status = input.status;
+  }
+  
+  return this.applicationRepo.save(application);
+}
 
   async remove(id: number): Promise<boolean> {
     const result = await this.applicationRepo.delete(id);

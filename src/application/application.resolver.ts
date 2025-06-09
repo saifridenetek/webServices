@@ -13,6 +13,11 @@ export class ApplicationResolver {
     return this.applicationService.create(input);
   }
 
+  @Query(() => [Application])
+applicationsByStatus(@Args('status') status: string) {
+  return this.applicationService.findByStatus(status);
+}
+
   @Query(() => [Application], { name: 'applications' })
   findAll() {
     return this.applicationService.findAll();

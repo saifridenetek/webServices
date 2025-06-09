@@ -17,17 +17,17 @@ Une entreprise technologique reçoit de nombreuses candidatures pour des stages 
 | Entité           | Attributs                                                                 |
 |------------------|--------------------------------------------------------------------------|
 | Candidate        | id, firstName, lastName, email, phone, cvUrl                             |
-| Application      | id, candidateId, positionId, status, submissionDate                      |
+| Application      | id, candidateId, positionId, status, createdAt                      |
 | Position         | id, title, description, type (internship/job)                            |
 | DecisionHistory  | id, applicationId, status, comment, date                                |
 
-*Optionnel :*
-- Recruiter → pour l'authentification ou le suivi des décisions (peut être omis pour le MVP)
 
 ### 🔄 Relations
 - Un Candidat peut avoir plusieurs candidatures (1:N)
 - Un Poste peut recevoir plusieurs candidatures (1:N)
 - Une Candidature a un historique de décisions (1:N)
+
+
 
 ## 🔹 1.3. Liste des Fonctionnalités (Opérations du Service Web)
 

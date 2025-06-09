@@ -9,6 +9,10 @@ export class Candidate {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field(() => [Application], { nullable: true })
+  @OneToMany(() => Application, app => app.candidate)
+  applications: Application[];
+
   @Field()
   @Column()
   firstName: string;
@@ -28,7 +32,4 @@ export class Candidate {
   @Field({ nullable: true })
   @Column({ nullable: true })
   cvUrl?: string;
-
-  @OneToMany(() => Application, app => app.candidate)
-  applications: Application[]; 
 }

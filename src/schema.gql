@@ -34,6 +34,7 @@ type Application {
 
 type Candidate {
   id: ID!
+  applications: [Application!]
   firstName: String!
   lastName: String!
   email: String!
@@ -43,10 +44,25 @@ type Candidate {
 
 type Query {
   candidates: [Candidate!]!
+  applicationsByStatus(status: String!): [Application!]!
+  applications: [Application!]!
+  application(id: Int!): Application!
+  applicationsByCandidate(candidateId: Int!): [Application!]!
+  positions: [Position!]!
+  position(id: Int!): Position!
+  decisionHistory: [DecisionHistory!]!
+  decisionHistoryByApplication(applicationId: Int!): [DecisionHistory!]!
 }
 
 type Mutation {
   createCandidate(input: CreateCandidateInput!): Candidate!
+  createApplication(input: CreateApplicationInput!): Application!
+  updateApplication(input: UpdateApplicationInput!): Application!
+  removeApplication(id: Int!): Boolean!
+  createPosition(input: CreatePositionInput!): Position!
+  updatePosition(input: UpdatePositionInput!): Position!
+  removePosition(id: Int!): Boolean!
+  createDecision(input: CreateDecisionHistoryInput!): DecisionHistory!
 }
 
 input CreateCandidateInput {
@@ -55,4 +71,37 @@ input CreateCandidateInput {
   email: String!
   phone: String
   cvUrl: String
+}
+
+input CreateApplicationInput {
+  candidateId: Float!
+  positionId: Float!
+  status: String!
+}
+
+input UpdateApplicationInput {
+  candidateId: Float
+  positionId: Float
+  status: String
+  id: Int!
+}
+
+input CreatePositionInput {
+  title: String!
+  type: String!
+  description: String!
+}
+
+input UpdatePositionInput {
+  title: String
+  type: String
+  description: String
+  id: Int!
+}
+
+input CreateDecisionHistoryInput {
+  status: String!
+  date: DateTime!
+  comment: String!
+  applicationId: Int!
 }

@@ -24,13 +24,12 @@ le fichier `app.module.ts`:
 ```node
       type: 'mysql',
       host: 'localhost',
-      port: 55555,
+      port: 3306,
       username: 'root',
       password: '',
-      database: 'candidate_tracking',
+      database: 'testdb',
 ```
 
-Assure-toi que la base de données `candidate_tracking` existe dans ton MySQL.
 
 ### 4. Lancer le serveur
 
@@ -38,7 +37,7 @@ Assure-toi que la base de données `candidate_tracking` existe dans ton MySQL.
 pnpm start:dev
 ```
 
-Le serveur sera accessible à : [http://localhost:3000/graphql](http://localhost:3000/graphql)
+Le serveur sera accessible à : [http://localhost:3004/graphql](http://localhost:3004/graphql)
 
 ## 🧪 Exemple de requête GraphQL
 
