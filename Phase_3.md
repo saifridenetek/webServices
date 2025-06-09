@@ -121,6 +121,18 @@ query {
   }
 }
 
+query {
+  applicationsByStatus(status: "ACCEPTE") {
+    id
+    createdAt
+    candidate {
+      firstName
+      lastName
+    }
+  }
+}
+
+
 #### 4. Consulter l'Historique des Décisions
 
 query {
@@ -159,5 +171,18 @@ mutation {
     id
     date
     status
+  }
+}
+
+####creation d'une candidature
+mutation {
+  createApplication(input: {
+    candidateId: 6    
+    positionId: 5     
+    status: "submitted"
+  }) {
+    id
+    status
+    createdAt
   }
 }
